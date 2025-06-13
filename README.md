@@ -3,6 +3,10 @@
 📖 *A full-stack web-based platform for online healthcare consultations and appointment scheduling in Vietnam.*
 
 ---
+## 🔗 Documentation
+
+📖 [Project Overview on Deepwiki](https://deepwiki.com/quoc223/bookingapp/1-overview)
+--
 
 ## 🧭 Purpose and Scope
 
