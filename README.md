@@ -1,182 +1,94 @@
-Purpose and Scope
-This document provides a comprehensive overview of the Vietnamese medical appointment booking system, a web-based platform that facilitates online healthcare consultations and appointment scheduling. This overview covers the system's core purpose, user roles, architecture, and technology stack. For detailed technical architecture information, see System Architecture. For specific backend API implementation details, see Backend API.
+# Booking App – Vietnamese Medical Appointment System
 
-System Description
-The Vietnamese medical appointment booking system is a full-stack web application designed to streamline healthcare services by enabling patients to book appointments with doctors, conduct online consultations, and manage their medical interactions digitally. The system supports Vietnamese language interfaces and integrates with local payment systems to serve the Vietnamese healthcare market.
+📖 *A full-stack web-based platform for online healthcare consultations and appointment scheduling in Vietnam.*
 
-Key Features
-Feature Category	Capabilities
-Patient Management	Account registration, profile management, appointment booking, online consultation
-Doctor Services	Schedule management, patient management, blog publishing, online diagnosis
-Administrative Functions	System monitoring, user management, security oversight, technical support
-Payment Processing	VNPAY integration for secure payment transactions
-Content Management	Blog system, AI-powered chat consultations, review system
-External Integrations	Image storage via Cloudinary, Vietnamese address APIs, AI chat services
-Sources: 
-README.md
-1-40
+---
 
-User Roles and Responsibilities
-The system implements role-based access control with three distinct user types, each with specific capabilities and access permissions.
+## 🧭 Purpose and Scope
 
-User Role Distribution
-Vietnamese Medical Booking System
+This document provides a comprehensive overview of the Vietnamese medical appointment booking system — a web application that enables patients to book appointments, consult doctors online, and manage healthcare digitally.
 
-Bệnh Nhân (Patient)
+- Language: Vietnamese interface
+- Target: Vietnamese healthcare market
+- Payment: Local gateways (VNPAY)
 
-Bác Sĩ (Doctor)
+---
 
-Quản Trị Viên (Admin)
+## 🔑 Key Features
 
-• Account registration
-• Appointment booking
-• Profile management
-• Online consultation
+| Category               | Capabilities                                                                 |
+|------------------------|------------------------------------------------------------------------------|
+| Patient Management     | Account registration, profile management, appointment booking, consultation  |
+| Doctor Services        | Schedule & patient management, blog publishing, online diagnosis             |
+| Admin Functions        | System monitoring, user management, security, support                        |
+| Payment Processing     | VNPAY integration for secure transactions                                    |
+| Content Management     | Blog system, AI-powered chat, review system                                  |
+| External Integrations  | Cloudinary for image storage, address APIs, AI chat services                 |
 
-• Schedule management
-• Patient management
-• Blog publishing
-• Online diagnosis
+---
 
-• System monitoring
-• User management
-• Security oversight
-• Technical support
+## 👥 User Roles and Responsibilities
 
-Sources: 
-README.md
-11-39
+Role-based access control with three user types:
 
-Role-Based Controller Mapping
-Backend Controllers
+- **Patient (Bệnh Nhân):** Register, book appointments, manage profile, consult online  
+- **Doctor (Bác Sĩ):** Manage schedule/patients, publish blog, online diagnosis  
+- **Admin (Quản Trị Viên):** Monitor system, manage users, security, technical support  
 
-User Roles
+---
 
-Bệnh Nhân
-(Patient)
+## 🧩 Role-Based Backend Controllers
 
-Bác Sĩ
-(Doctor)
+| Controller             | Role(s)            |
+|------------------------|--------------------|
+| `authController`       | All                |
+| `patientController`    | Patient            |
+| `doctorController`     | Doctor             |
+| `appointmentController`| Patient, Doctor    |
+| `blogController`       | Doctor             |
+| `chatController`       | Patient, Doctor    |
+| `dashboardController`  | Admin              |
+| `paymentController`    | Patient            |
+| `reviewController`     | Patient            |
 
-Quản Trị Viên
-(Admin)
+---
 
-patientController
+## 🧱 Technology Stack
 
-doctorController
+| Layer           | Technology               | Purpose                                      |
+|-----------------|--------------------------|----------------------------------------------|
+| Frontend        | ReactJS + TailwindCSS    | UI and responsive layout                     |
+| Backend         | NodeJS + ExpressJS       | REST API and core business logic             |
+| Database        | MySQL                    | Data storage and stored procedures           |
+| Authentication  | JWT + bcrypt             | Secure login and role-based access           |
+| Payment         | VNPAY                    | Vietnamese payment gateway integration       |
 
-authController
+---
 
-appointmentController
+## ⚙️ Development Environment
 
-blogController
+- Structured as a Node.js monorepo (`/frontend` and `/backend`)
+- `.gitignore` excludes `node_modules` and `.env` files
+- Uses environment-based config for secure API key handling
 
-chatController
+---
 
-dashboardController
+## 🧠 High-Level System Architecture
 
-paymentController
-
-reviewController
-
-Sources: 
-README.md
-11-39
- Backend controller files structure
-
-Technology Stack
-Core Technologies
-Layer	Technology	Purpose
-Frontend	ReactJS + TailwindCSS	User interface and responsive design
-Backend	NodeJS + ExpressJS	REST API server and business logic
-Database	MySQL	Data persistence and stored procedures
-Authentication	JWT + bcrypt	Secure user authentication and authorization
-Payment	VNPAY	Vietnamese payment gateway integration
-Development Environment
-The project follows standard Node.js project structure with separate frontend and backend directories, as evidenced by the .gitignore configuration that excludes node_modules from both /frontend/ and /backend/ directories, along with environment files.
-
-Sources: 
-README.md
-3-7
- 
-.gitignore
-7-9
-
-High-Level System Architecture
-Three-Tier Architecture Overview
+```text
 External Services
-
-Data Layer
-
-Application Layer
+ └── Cloudinary (Image Upload)
+ └── VNPAY (Payments)
+ └── AI Chat (Consultation)
+ └── Vietnamese Address API
 
 Presentation Layer
+ └── ReactJS + TailwindCSS (Port 3000)
 
-HTTP/HTTPS
+Application Layer
+ └── NodeJS + ExpressJS
+ └── JWT Auth + bcrypt
+ └── Role-based Middleware
 
-Payment Processing
-
-Image Upload
-
-Chat Consultation
-
-Address Data
-
-Frontend Application
-ReactJS + TailwindCSS
-Port: 3000
-
-Backend API Server
-NodeJS + ExpressJS
-
-Authentication System
-JWT + bcrypt
-
-Middleware Stack
-auth.js, authentication.js
-
-MySQL Database
-Connection Pool
-
-Stored Procedures
-
-VNPAY Payment Gateway
-
-Cloudinary Image Storage
-
-AI Chat Service
-
-Vietnamese Address API
-
-Sources: 
-README.md
-3-7
- project structure analysis
-
-External Integrations
-The system integrates with several external services to provide comprehensive functionality:
-
-Integration Points
-Service	Purpose	Implementation
-VNPAY	Payment processing for appointment fees	Sandbox environment for development
-Cloudinary	Image storage and management	Profile pictures, blog images
-AI Chat Service	Automated consultation support	Mistral-7B model integration
-Vietnamese Address API	Location data for user profiles	Province/District/Ward hierarchy
-Configuration Management
-The system uses environment-based configuration management with separate .env files for different deployment environments, ensuring secure handling of API keys and connection strings for external services.
-
-Sources: 
-README.md
-7
- 
-.gitignore
-7
- system architecture analysis
-
-Project Structure
-The codebase follows a standard separation of concerns with distinct frontend and backend applications. The backend implements a RESTful API architecture with role-based authentication, while the frontend provides a responsive user interface for the three user types. For detailed information about the backend API structure and endpoints, see Backend API.
-
-Sources: 
-.gitignore
-8-9
- overall project analysis
+Data Layer
+ └── MySQL Database (Connection Pool + Stored Procedures)
